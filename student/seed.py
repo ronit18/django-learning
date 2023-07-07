@@ -1,5 +1,5 @@
 from faker import Faker
-from .models import Department, StudentID, Student
+from .models import Department, StudentID, Student, Subject, SubjectMarks
 
 fake = Faker()
 import random
@@ -29,5 +29,19 @@ def seedDB(n=100) -> None:
                 student_address=student_address,
             )
             student_obj.save()
+    except Exception as e:
+        print(e)
+
+
+def seedMarks():
+    try:
+        student_obj = Student.objects.all()
+        for student in student_obj:
+            subjects = Subject.objects.all()
+            for subject in subjects:
+                SubjectMarks.objects.create(
+                    subject=subject, student=student, marks=random.randint(0, 100)
+                )
+
     except Exception as e:
         print(e)
