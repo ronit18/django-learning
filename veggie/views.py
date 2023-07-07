@@ -3,9 +3,11 @@ from .models import Receipe
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="/login/")
 def receipe(request):
     try:
         if request.method == "POST":
@@ -98,6 +100,11 @@ def login_page(request):
     except Exception as e:
         print(e)
         return HttpResponse("Something went wrong")
+
+
+def logout_page(request):
+    logout(request)
+    return redirect("/recipe/")
 
 
 def register_page(request):
