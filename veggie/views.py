@@ -82,15 +82,17 @@ def login_page(request):
             username = data.get("username")
             password = data.get("password")
 
-            usernameDB = User.objects.filter(username=username)
-            userPassCheck = authenticate(username=username, password=password)
-            if usernameDB.exists() and userPassCheck is None:
-                messages.error(request, "Invalid username or password")
-                return redirect("login")
+            user = authenticate(username=username, password=password)
+            print("########################")
+            print(User.objects.filter(username=username).exists())
+            print("########################")
 
+            if not User.objects.filter(username=username).exists() and user is None:
+                messages.error(request, "Username does not exists")
+                return redirect("login")
             else:
-                login(request, userPassCheck)
-                return redirect("recipe")
+                login(request, user)
+                return redirect("/recipe/")
 
         return render(request, "login.html")
     except Exception as e:
