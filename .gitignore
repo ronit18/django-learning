@@ -1,0 +1,58 @@
+# Django project files
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+
+# Development environment
+.env
+.env.local
+.env.*.local
+.env.*.test
+.env.*.stage
+.env.*.prod
+
+# Static files
+/static/
+*.css
+*.js
+*.map
+
+# Media files
+/media/
+
+# Compiled Python bytecode
+*.pyc
+
+# Dependency directories
+/.venv/
+/site-packages/
+
+# Environment variables
+/.env
+
+# Miscellaneous
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.bak
+*.swp
+*.swo
+*.pydevproject
+*.pydevprojectc
+*.pydevworkspace
+*.project
+*.pytproject
+*.wsgi
+*.egg-info/
+*.egg
+*.coverage
+htmlcov/
+.coverage
+.sass-cache/
+.cache/
+.pytest_cache/
+.tox/
+dist/
+build/
