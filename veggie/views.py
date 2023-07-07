@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Receipe
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 def receipe(request):
@@ -64,4 +66,27 @@ def login_page(request):
 
 
 def register_page(request):
+    if request.method == "POST":
+        data = request.POST
+
+        username = data.get("username")
+        first_name = data.get("first_name")
+        last_name = data.get("last_name")
+        password = data.get("password")
+
+        usernameDB = User.objects.filter(username=username)
+        if usernameDB.exists():
+            messages.error(request, "Username already exists")
+            return redirect("register")
+
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+        )
+        messages.success(request, "Account created successfully")
+
+        user.set_password(password)
+        return redirect("register")
+
     return render(request, "register.html")
